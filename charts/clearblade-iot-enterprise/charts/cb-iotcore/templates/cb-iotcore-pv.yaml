@@ -14,5 +14,5 @@ spec:
     name: cb-iotcore-pvc
   csi:
     driver: pd.csi.storage.gke.io
-    volumeHandle: projects/{{ .Values.global.gcp.project }}/regions/{{ .Values.global.gcp.region }}/disks/{{ default "clearblade" .Values.global.namespace }}-{{ .Values.storage.gceDisk_iotcore }}
+    volumeHandle: projects/{{ .Values.global.gcp.project }}/regions/{{ .Values.global.gcp.region }}/disks/{{ default "clearblade" .Values.global.namespace }}-iotcore
     fsType: ext4
