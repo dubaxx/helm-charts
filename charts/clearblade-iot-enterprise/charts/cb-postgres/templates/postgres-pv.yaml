@@ -1,0 +1,77 @@
+{{- if eq .Values.global.cloud "gcp" }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ default "clearblade" .Values.global.namespace}}-postgres-0
+  namespace: {{ default "clearblade" .Values.global.namespace }}
+spec:
+  storageClassName: {{ .Values.storageClass }}
+  capacity:
+    storage: {{ .Values.storageSize }}
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: {{ default "clearblade" .Values.global.namespace }}
+    name: pvc-cb-postgres-cb-postgres-0
+  csi:
+    driver: pd.csi.storage.gke.io
+    volumeHandle: projects/{{ .Values.global.gcp.project }}/regions/{{ .Values.global.gcp.region }}/disks/{{ default "clearblade" .Values.global.namespace }}-{{ .Values.gceDisk_postgres0 }}
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ default "clearblade" .Values.global.namespace}}-postgres-1
+  namespace: {{ default "clearblade" .Values.global.namespace }}
+spec:
+  storageClassName: {{ .Values.storageClass }}
+  capacity:
+    storage: {{ .Values.storageSize }}
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: {{ default "clearblade" .Values.global.namespace }}
+    name: pvc-cb-postgres-cb-postgres-1
+  csi:
+    driver: pd.csi.storage.gke.io
+    volumeHandle: projects/{{ .Values.global.gcp.project }}/regions/{{ .Values.global.gcp.region }}/disks/{{ default "clearblade" .Values.global.namespace }}-{{ .Values.gceDisk_postgres1 }}
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ default "clearblade" .Values.global.namespace}}-postgres-2
+  namespace: {{ default "clearblade" .Values.global.namespace }}
+spec:
+  storageClassName: {{ .Values.storageClass }}
+  capacity:
+    storage: {{ .Values.storageSize }}
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: {{ default "clearblade" .Values.global.namespace }}
+    name: pvc-cb-postgres-cb-postgres-2
+  csi:
+    driver: pd.csi.storage.gke.io
+    volumeHandle: projects/{{ .Values.global.gcp.project }}/regions/{{ .Values.global.gcp.region }}/disks/{{ default "clearblade" .Values.global.namespace }}-{{ .Values.gceDisk_postgres2 }}
+    fsType: ext4
+{{- else if eq .Values.global.cloud "aws" }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ default "clearblade" .Values.global.namespace}}-postgres-0
+  namespace: {{ default "clearblade" .Values.global.namespace }}
+spec:
+  storageClassName: {{ .Values.storageClass }}
+  persistentVolumeReclaimPolicy: Retain
+  capacity:
+    storage: {{ .Values.storageSize }}
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: {{ default "clearblade" .Values.global.namespace }}
+    name: pvc-cb-postgres-cb-postgres-0
+  csi:
+    driver: ebs.csi.aws.com
+    volumeHandle: {{ .Values.global.eksEbsPostgresVolumeHandle }}
+{{- end }}

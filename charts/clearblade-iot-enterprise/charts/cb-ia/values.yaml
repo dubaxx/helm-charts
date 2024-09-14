@@ -1,6 +1,10 @@
-resourceLimits:
-  cpu: 1
-  memory: 2G
+# resourceLimits:
+#   cpu: 1
+#   memory: 2G
+requestCPU: 1
+requestMemory: 2G
+limitCPU: 1
+limitMemory: 2G
 storage:
   class: premium-rwo
   size: 10Gi
