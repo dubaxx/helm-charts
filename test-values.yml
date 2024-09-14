@@ -67,8 +67,8 @@ global:
   # enterpriseTagOverride: false
 
 ####TODO DOES IT DEFAULT TO FALSE???
-  # Optional. Set to "true" if this deployment uses the IOTCore Sidecar. Leave blank or comment out if not using.
-  # iotCoreEnabled:
+  # Required. Set to "true" if this deployment uses the IOTCore Sidecar.
+  iotCoreEnabled: false
 
   # Optional. Comma-separated list of the regions IOTCore will be deployed in. Leave blank or comment out if not using.
   # iotCoreRegions:
@@ -77,8 +77,8 @@ global:
   # iotCoreVersion:
 
 ####TODO DOES IT DEFAULT TO FALSE???
-  # Set to "true" if this deployment uses the Intelligent Assets Sidecar. Leave blank or comment out if not using.
-  # iaEnabled:
+  # Required. Set to "true" if this deployment uses the Intelligent Assets Sidecar.
+  iaEnabled: false
 
   # Required if using the Intelligent Assets sidecar. Intelligent Assets sidecar version. Leave blank or comment out if not using.
   # iaVersion:
