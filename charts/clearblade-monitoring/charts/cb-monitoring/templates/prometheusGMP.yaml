@@ -1,4 +1,4 @@
-{{- if eq (default .Values.global.GMP false) false}}
+{{- if eq (default .Values.global.gmpEnabled false) false}}
 {{- else }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -21,7 +21,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   namespace: {{ default "monitoring" .Values.global.namespace }}
-  name: {{ .Values.global.gcp.gsmReadServiceAccount }}
+  name: {{ .Values.global.gcpGSMServiceAccount }}
 ---
 apiVersion: v1
 kind: Service

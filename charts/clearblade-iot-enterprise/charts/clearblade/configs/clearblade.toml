@@ -37,7 +37,7 @@ AllowRetainedMessages = {{ .Values.mqtt.allowRetainedMessages }}
 [Database]
 {{- if .Values.global.externalPostgresHost }}
 DBHost = "{{ .Values.global.externalPostgresHost }}"
-{{- else if .Values.global.cloudSQL }}
+{{- else if .Values.global.gcpCloudSQLEnabled }}
 DBHost = "127.0.0.1"
 DisableTimescale = true
 {{- else }}
@@ -92,9 +92,9 @@ MaxLockWaitTime = 900
 
 {{ if gt .Values.replicas 1.0}}
 [KVStore]
-{{ if .Values.global.memorystore }}
+{{ if .Values.global.gcpMemoryStoreEnabled }}
 SkipSettingNotifyKeyspaceEvents = true
-Address = "{{ .Values.global.memorystoreAddress }}"
+Address = "{{ .Values.global.gcpMemoryStoreAddress }}"
 {{ else }}
 Address = "cb-redis-service.{{ default "clearblade" .Values.global.namespace }}.svc.cluster.local"
 {{- end }}

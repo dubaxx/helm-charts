@@ -29,9 +29,9 @@ roleRef:
   name: prometheus-{{ default "monitoring" .Values.global.namespace }}
 subjects:
 - kind: ServiceAccount
-  {{- if eq (default .Values.global.GMP false) false}}
+  {{- if eq (default .Values.global.gmpEnabled false) false}}
   name: default
   {{- else }}
-  name: {{ .Values.global.gcp.gsmReadServiceAccount }}
+  name: {{ .Values.global.gcpGSMServiceAccount }}
   {{- end }}
   namespace: {{ default "monitoring" .Values.global.namespace }}

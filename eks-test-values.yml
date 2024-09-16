@@ -1,37 +1,3 @@
-#TODO make all values nullable if false/not enabled
-  # enterprise:
-  #   baseURL: michael-eks-test.clearblade.com
-  #   consoleURL: null
-  #   greenVersion: null
-  #   instanceID: michael-eks-test
-  #   registrationKey: test
-  #   slot: blue
-  #   tagOverride: false
-  #   version: 9.36.2
-  # iotCore:
-    # enabled: false
-    # regions: REPLACE
-    # version: REPLACE
-  # IA:
-  #   enabled: false
-  #   version: 9.34.2_5.85.0
-  # gcp:
-      # cloudSQL:
-      #   enabled: false
-      #   databaseConnectionName: null
-      # memoryStore:
-      #   enabled: false
-      #   address: null
-  # GMP: false
-  # eks:
-    # ebs:
-    #   postgresVolumeAZ: us-east-1a
-    #   postgresVolumeHandle: vol-07366f6ff8defd949
-  # advanced:
-  #   predefinedNamespace: false
-  #   secrets:
-  #     manager: asm
-
 global:
   # Required. Supported clouds are "aws" and "gcp". As this values file is for EKS, the value should be "aws".
   cloud: aws
@@ -66,7 +32,6 @@ global:
   # Optional. Manually override the version tag for the ClearBlade container. Leave blank or comment out if not using.
   # enterpriseTagOverride: false
 
-####TODO DOES IT DEFAULT TO FALSE???
   # Required. Set to "true" if this deployment uses the IOTCore Sidecar.
   iotCoreEnabled: false
 
@@ -76,7 +41,6 @@ global:
   # Required if using the IOTCore sidecar. IOTCore sidecar version. Leave blank or comment out if not using.
   # iotCoreVersion:
 
-####TODO DOES IT DEFAULT TO FALSE???
   # Required. Set to "true" if this deployment uses the Intelligent Assets Sidecar.
   iaEnabled: false
 
@@ -143,8 +107,8 @@ cb-haproxy:
   # ip:
   #   mqtt: REPLACE
   #   primary: eipalloc-03e1ab7e96e94c4a8,eipalloc-073aa91feecdbcba6
-  mqttIP: REPLACE
   primaryIP: eipalloc-03e1ab7e96e94c4a8,eipalloc-073aa91feecdbcba6
+  mqttIP: REPLACE
   # monitoringEnabled: false
   mqttOver443: false
   replicas: 1
@@ -164,8 +128,8 @@ cb-iotcore:
   # resourceLimits:
   #   cpu: 1
   #   memory: 2G
-  requestCPU: 0.25 #TODO add
-  requestMemory: .25G #TODO add
+  requestCPU: 0.25 
+  requestMemory: .25G 
   limitCPU: 0.25
   limitMemory: .25G
 cb-postgres:

@@ -25,7 +25,7 @@ spec:
         topology.kubernetes.io/zone: {{ .Values.global.eksEbsPostgresVolumeAZ }}
       {{- end }}
       {{- if eq .Values.global.secretManager "gsm"}}
-      serviceAccountName: {{ .Values.global.gcp.gsmReadServiceAccount }}
+      serviceAccountName: {{ .Values.global.gcpGSMServiceAccount }}
       initContainers:
         - name: init
           image: google/cloud-sdk:slim

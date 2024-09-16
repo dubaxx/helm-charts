@@ -11,7 +11,7 @@ spec:
   selector:
     app: cb-postgres
 ---
-{{- if eq (default .Values.global.GMP false) false}}
+{{- if eq (default .Values.global.gmpEnabled false) false}}
 {{- if .Values.global.monitoringenabled }}
 {{- range $i, $e := until (.Values.replicas | int)}}
 apiVersion: v1

@@ -1,4 +1,4 @@
-{{- if eq (default .Values.global.GMP false) false}}
+{{- if eq (default .Values.global.gmpEnabled false) false}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

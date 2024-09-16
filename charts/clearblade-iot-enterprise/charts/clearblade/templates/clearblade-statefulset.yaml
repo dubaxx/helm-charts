@@ -27,7 +27,7 @@ spec:
         - name: gcr-json-key
       {{- end }}
       initContainers:
-        {{- if not .Values.global.gcpCloudSQLConnectionName }}
+        {{- if not .Values.global.gcpCloudSQLEnabled }}
         - name: check-postgres-readiness
           image: postgres:9.6.5
           command: 
@@ -39,7 +39,7 @@ spec:
         {{- end }}
         - name: check-redis-readiness
           image: redis:5.0-alpine
-          {{- if .Values.global.gcpMemoryStore }}
+          {{- if .Values.global.gcpMemoryStoreEnabled }}
           command: 
           - sh 
           - "-c"
@@ -237,7 +237,7 @@ spec:
         - name: gcr-json-key
       {{- end }}
       initContainers:
-        {{- if not .Values.global.gcpCloudSQLConnectionName }}
+        {{- if not .Values.global.gcpCloudSQLEnabled }}
         - name: check-postgres-readiness
           image: postgres:9.6.5
           command: 
@@ -249,7 +249,7 @@ spec:
         {{- end }}
         - name: check-redis-readiness
           image: redis:5.0-alpine
-          {{- if .Values.global.gcpMemoryStore }}
+          {{- if .Values.global.gcpMemoryStoreEnabled }}
           command: 
           - sh 
           - "-c"

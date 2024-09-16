@@ -34,7 +34,7 @@ spec:
             secretName: cb-haproxy-config 
         - name: haproxy-cert-volume
           emptyDir: {}
-      serviceAccountName: {{ .Values.global.gcp.gsmReadServiceAccount }}
+      serviceAccountName: {{ .Values.global.gcpGSMServiceAccount }}
       initContainers:
         - name: init
           image: google/cloud-sdk:slim

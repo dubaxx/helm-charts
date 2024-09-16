@@ -1,4 +1,4 @@
-{{- if eq (default .Values.global.GMP false) false}}
+{{- if eq (default .Values.global.gmpEnabled false) false}}
 {{- else }}
 apiVersion: apps/v1
 kind: Deployment
@@ -36,7 +36,7 @@ spec:
           image: gke.gcr.io/prometheus-engine/frontend:v0.7.0-gke.0
           args:
             - "--web.listen-address=:9090"
-            - "--query.project-id={{ .Values.global.gcp.project }}"
+            - "--query.project-id={{ .Values.global.gcpProject }}"
           ports:
           - name: web
             containerPort: 9090

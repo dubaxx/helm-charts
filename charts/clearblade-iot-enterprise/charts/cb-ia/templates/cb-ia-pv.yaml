@@ -14,5 +14,5 @@ spec:
     name: cb-ia-pvc
   csi:
     driver: pd.csi.storage.gke.io
-    volumeHandle: projects/{{ .Values.global.gcp.project }}/regions/{{ .Values.global.gcp.region }}/disks/{{ default "clearblade" .Values.global.namespace }}-ia
+    volumeHandle: projects/{{ .Values.global.gcpProject }}/regions/{{ .Values.global.gcpRegion }}/disks/{{ default "clearblade" .Values.global.namespace }}-ia
     fsType: ext4

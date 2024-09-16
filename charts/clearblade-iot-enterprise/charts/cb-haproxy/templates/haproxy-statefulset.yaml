@@ -46,7 +46,7 @@ spec:
           emptyDir: {}
         {{- end}}
       {{- if eq .Values.global.secretManager "gsm" }}
-      serviceAccountName: {{ .Values.global.gcp.gsmReadServiceAccount }}
+      serviceAccountName: {{ .Values.global.gcpGSMServiceAccount }}
       {{- end}}
       initContainers:
         - name: check-clearblade-readiness
@@ -150,7 +150,7 @@ spec:
             requests:
               cpu: 102m
               memory: 180Mi
-{{- if eq (default .Values.global.GMP false) false}}
+{{- if eq (default .Values.global.gmpEnabled false) false}}
 {{- else }}
 ---
 apiVersion: monitoring.googleapis.com/v1
