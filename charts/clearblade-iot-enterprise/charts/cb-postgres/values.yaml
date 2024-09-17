@@ -27,6 +27,8 @@ readinessProbe:
   successThreshold: 1
 
 storageSize: 100Gi
-gceDisk_postgres0: postgres-0
-gceDisk_postgres1: postgres-1
-gceDisk_postgres2: postgres-2
+postgres0DiskName: postgres-0
+postgres1DiskName: postgres-1
+postgres2DiskName: postgres-2
+volumeAZ:
+volumeHandle:
