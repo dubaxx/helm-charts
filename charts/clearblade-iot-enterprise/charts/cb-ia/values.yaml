@@ -5,3 +5,4 @@ limitMemory: 2G
 storageSize: 10Gi
 checkClearbladeReadiness: true
 version:
+volumeHandle:
