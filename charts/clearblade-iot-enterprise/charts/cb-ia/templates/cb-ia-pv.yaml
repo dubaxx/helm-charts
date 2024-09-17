@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: {{ default "clearblade" .Values.global.namespace}}-cb-ia-pv
+  name: {{ default "clearblade" .Values.global.namespace}}-ia-pv
   namespace: {{ default "clearblade" .Values.global.namespace}}
 spec:
-  storageClassName: {{ .Values.storageClass }}
+  storageClassName: {{ .Values.global.storageClassName }}
   capacity:
     storage: {{ .Values.storageSize }}
   accessModes:

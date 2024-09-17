@@ -215,7 +215,7 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
-        storageClassName: {{ .Values.storageClass }}
+        storageClassName: {{ .Values.global.storageClassName }}
         resources:
           requests:
             storage: {{ .Values.storageSize }}

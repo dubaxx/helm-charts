@@ -5,7 +5,7 @@ metadata:
   name: pvc-cb-postgres-cb-postgres-0
   namespace: {{ default "clearblade" .Values.global.namespace }}
 spec:
-  storageClassName: {{ .Values.storageClass }}
+  storageClassName: {{ .Values.global.storageClassName }}
   accessModes:
     - ReadWriteOnce
   resources:

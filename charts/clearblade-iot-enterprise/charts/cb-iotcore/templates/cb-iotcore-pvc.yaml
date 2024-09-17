@@ -4,7 +4,7 @@ metadata:
   name: cb-iotcore-pvc
   namespace: {{ default "clearblade" .Values.global.namespace }}
 spec:
-  storageClassName: {{ .Values.storageClass }}
+  storageClassName: {{ .Values.global.storageClassName }}
   accessModes:
     - ReadWriteOnce
   resources:

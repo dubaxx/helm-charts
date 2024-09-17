@@ -5,7 +5,7 @@ metadata:
   name: {{ default "clearblade" .Values.global.namespace}}-postgres-0
   namespace: {{ default "clearblade" .Values.global.namespace }}
 spec:
-  storageClassName: {{ .Values.storageClass }}
+  storageClassName: {{ .Values.global.storageClassName }}
   capacity:
     storage: {{ .Values.storageSize }}
   accessModes:
@@ -24,7 +24,7 @@ metadata:
   name: {{ default "clearblade" .Values.global.namespace}}-postgres-1
   namespace: {{ default "clearblade" .Values.global.namespace }}
 spec:
-  storageClassName: {{ .Values.storageClass }}
+  storageClassName: {{ .Values.global.storageClassName }}
   capacity:
     storage: {{ .Values.storageSize }}
   accessModes:
@@ -43,7 +43,7 @@ metadata:
   name: {{ default "clearblade" .Values.global.namespace}}-postgres-2
   namespace: {{ default "clearblade" .Values.global.namespace }}
 spec:
-  storageClassName: {{ .Values.storageClass }}
+  storageClassName: {{ .Values.global.storageClassName }}
   capacity:
     storage: {{ .Values.storageSize }}
   accessModes:
@@ -62,7 +62,7 @@ metadata:
   name: {{ default "clearblade" .Values.global.namespace}}-postgres-0
   namespace: {{ default "clearblade" .Values.global.namespace }}
 spec:
-  storageClassName: {{ .Values.storageClass }}
+  storageClassName: {{ .Values.global.storageClassName }}
   persistentVolumeReclaimPolicy: Retain
   capacity:
     storage: {{ .Values.storageSize }}

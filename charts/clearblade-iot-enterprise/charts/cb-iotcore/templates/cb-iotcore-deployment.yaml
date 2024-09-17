@@ -35,9 +35,9 @@ spec:
       {{- end }}
       containers:
         - name: cb-iotcore
-          image: gcr.io/api-project-320446546234/iotcore:{{ .Values.global.iotCoreVersion }}
+          image: gcr.io/api-project-320446546234/iotcore:{{ .Values.version }}
           command:  ["iotcore"]
-          args: ["-reg-key={{ .Values.global.enterpriseRegistrationKey }}", "-regions={{ .Values.global.iotCoreRegions }}", "-url=https://{{ .Values.global.enterpriseBaseURL }}"]
+          args: ["-reg-key={{ .Values.global.enterpriseRegistrationKey }}", "-regions={{ .Values.regions }}", "-url=https://{{ .Values.global.enterpriseBaseURL }}"]
           volumeMounts:
           - name: iotcore
             mountPath: /etc/clearblade/conf/iotcore

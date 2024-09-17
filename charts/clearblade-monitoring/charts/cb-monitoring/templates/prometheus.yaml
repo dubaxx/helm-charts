@@ -90,7 +90,7 @@ metadata:
   name: prometheus-pvc
   namespace: {{ default "monitoring" .Values.global.namespace }}
 spec:
-  storageClassName: premium-rwo
+  storageClassName: {{ .Values.global.storageClassName }}
   accessModes:
     - ReadWriteOnce
   resources:
@@ -103,7 +103,7 @@ metadata:
   name: prometheus-pv
   namespace: {{ default "monitoring" .Values.global.namespace }}
 spec:
-  storageClassName: premium-rwo
+  storageClassName: {{ .Values.global.storageClassName }}
   capacity:
     storage: {{ .Values.prometheusDiskSize}}
   accessModes:

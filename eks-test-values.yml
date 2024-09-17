@@ -1,7 +1,7 @@
 global:
   # Required. Supported clouds are "aws" and "gcp". As this values file is for EKS, the value should be "aws".
   cloud: aws
-  
+
   # Optional. Namespace to deploy to. Default is "clearblade"
   namespace: clearblade
 
@@ -35,12 +35,6 @@ global:
   # Required. Set to "true" if this deployment uses the IOTCore Sidecar.
   iotCoreEnabled: false
 
-  # Optional. Comma-separated list of the regions IOTCore will be deployed in. Leave blank or comment out if not using.
-  # iotCoreRegions:
-
-  # Required if using the IOTCore sidecar. IOTCore sidecar version. Leave blank or comment out if not using.
-  # iotCoreVersion:
-
   # Required. Set to "true" if this deployment uses the Intelligent Assets Sidecar.
   iaEnabled: false
 
@@ -66,121 +60,87 @@ global:
   # mekfile:
 
   # Optional. Directly input your postgres password if not using a secret manager. Leave blank or comment out if not using.
-  # postgresPassword: 
+  # postgresPassword:
+
+  # Optional. Define the storage class used by all Persistent Volume Claims in the deployment. Leave blank or comment out if not using.
+  storageClassName: gp2
 
   # Optional. Set to true if you wish to enable mTLS support on the ClearBlade pods. Leave blank or comment out if not using.
-  # mtlsClearBlade: 
+  # mtlsClearBlade:
 
   # Optional. Set to true if you wish to enable mTLS support on the HAProxy pods. Leave blank or comment out if not using.
-  # mtlsHAProxy: 
+  # mtlsHAProxy:
 
   # Optional. Set to true if you plan on utilizing the monitoring deployment. Leave blank or comment out if not using.
-  # monitoringEnabled: 
+  # monitoringEnabled:
 
-
+# Requests and limits for CPU/memory have default settings in each chart values file. They can be overidden for each chart below.
 cb-console:
-  # resourceRequests:
-  #   cpu: 0.2
-  #   memory: .2G
-  # resourceLimits:
-  #   cpu: 0.2
-  #   memory: .2G
   requestCPU: 0.2
   requestMemory: .2G
   limitCPU: 0.2
   limitMemory: .2G
 cb-file-hosting:
-  # resourceLimits:
-  #   cpu: 0.2
-  #   memory: .2G
-  # resourceRequests:
-  #   cpu: 0.2
-  #   memory: .2G
   requestCPU: 0.2
   requestMemory: .2G
   limitCPU: 0.2
   limitMemory: .2G
 cb-haproxy:
-  enabled: true
-  # image: haproxy
-  # imageTag: 2.6-alpine
-  # ip:
-  #   mqtt: REPLACE
-  #   primary: eipalloc-03e1ab7e96e94c4a8,eipalloc-073aa91feecdbcba6
-  primaryIP: eipalloc-03e1ab7e96e94c4a8,eipalloc-073aa91feecdbcba6
-  mqttIP: REPLACE
-  # monitoringEnabled: false
-  mqttOver443: false
   replicas: 1
-  # resourceLimits:
-  #   cpu: 0.25
-  #   memory: .25G
-  # resourceRequests:
-  #   cpu: 0.25
-  #   memory: .25G
-  stats_auth: ""
   requestCPU: 0.25
   requestMemory: .25G
   limitCPU: 0.25
   limitMemory: .25G
+  # Required. Set to false if using an external HAProxy deployment.
+  enabled: true
+  # Required if using this HAProxy. The primary external IP address for the deployment.
+  primaryIP: eipalloc-03e1ab7e96e94c4a8,eipalloc-073aa91feecdbcba6
+  # Required if utilizing external MQTT connections. Leave blank or comment out if not using.
+  mqttIP:
+  # Required. Set to true if you would like MQTT connections to work over 443 in addition to the default 1883.
+  mqttOver443: false
 cb-iotcore:
+  # Optional. Set to true to force the IOTCore pod to wait for the Clearblade pods before starting.
   checkClearbladeReadiness: false
-  # resourceLimits:
-  #   cpu: 1
-  #   memory: 2G
-  requestCPU: 0.25 
-  requestMemory: .25G 
+  requestCPU: 0.25
+  requestMemory: .25G
   limitCPU: 0.25
   limitMemory: .25G
+  # Required if using the IOTCore sidecar. IOTCore sidecar version. Leave blank or comment out if not using.
+  # version:
+  # Optional. Comma-separated list of the regions IOTCore will be deployed in. Leave blank or comment out if not using.
+  # regions:
+cb-ia:
+  # Optional. Set to true to force the Intelligent Assets pod to wait for the Clearblade pods before starting.
+  checkClearbladeReadiness: false
+  requestCPU: 0.25
+  requestMemory: .25G
+  limitCPU: 0.25
+  limitMemory: .25G
+  # Required if using the Intelligent Assets sidecar. Intelligent Assets sidecar version. Leave blank or comment out if not using.
+  # version:
 cb-postgres:
+  # Required. Set to false if using an external postgres deployment.
   enabled: true
-  image: timescale/timescaledb
-  imageTag: latest-pg15
-  # monitoringEnabled: false
   replicas: 1
-  # resourceLimits:
-  #   cpu: 0.25
-  #   memory: .5G
-  # resourceRequests:
-  #   cpu: 0.25
-  #   memory: .5G
   requestCPU: 0.25
   requestMemory: .5G
   limitCPU: 0.25
   limitMemory: .5G
-  # storage:
-  #   class: ""
-  #   size: 10G
-  storageClass: "" #TODO check?
-  storageSize: 10G #TODO check, where is it used?
 cb-redis:
+  # Required. Set to false if using an external redis deployment.
   enabled: true
-  image: redis
-  imageTag: alpine
-  # monitoringEnabled: false
-  # resourceLimits:
-  #   cpu: 0.25
-  #   memory: .5G
-  # resourceRequests:
-  #   cpu: 0.25
-  #   memory: .5G
   requestCPU: 0.25
   requestMemory: .5G
   limitCPU: 0.25
   limitMemory: .5G
 clearblade:
-  # replicas: 2
+  # Required. If not using blue/green deployments, blue is the default. See the README for an explanation on blue/green deployments.
   blueReplicas: 2
+  # Required. If not using blue/green deployments, set to 0. See the README for an explanation on blue/green deployments.
   greenReplicas: 0
-  # mqtt:
-  #   allowDuplicateClientID: true
+  # Required. Set to true to allow duplicate client IDs. Set to false to reject duplicate connections.
   mqttAllowDuplicateClientID: true
-  # resourceLimits:
-  #   cpu: 0.25
-  #   memory: .25G
-  # resourceRequests:
-  #   cpu: 0.25
-  #   memory: .25G
   requestCPU: 0.25
   requestMemory: .25G
   limitCPU: 0.25
